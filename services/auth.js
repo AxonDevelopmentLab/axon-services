@@ -59,7 +59,7 @@ exports.main = (UserIP, RequestData, UserHTTP) => {
         await accountScheme.findOneAndUpdate({ ID: getAccountDetails.ID }, { LoginAttempts: getAccountDetails.LoginAttempts });
         UserHTTP.send({ status: 401, message: { text: "Credênciais inválidas.", color: "red" }})
 
-        if (findAttemptByIP.Attempt > 3) {
+        if (findAttemptByIP.Attempts > 3) {
           setTimeout(async () => {
             let getAgainAccountDetails = await accountScheme.findOne({ ID: getAccountDetails.ID });
             const refindAttemptByIP = getAgainAccountDetails.LoginAttempts.find(object => object.IP === UserIP);
